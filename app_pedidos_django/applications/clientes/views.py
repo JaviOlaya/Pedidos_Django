@@ -2,9 +2,9 @@ from django.shortcuts import render
 
 from .models import Cliente
 
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView,RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView
 
 # Create your views here.
 
@@ -26,3 +26,22 @@ class ClientesListAPIView(ListAPIView):
     def get_queryset(self):
       
         return Cliente.objects.all()
+
+class ClienteCreateView(CreateAPIView):
+    serializer_class = ClienteSerializer
+
+
+class ClienteRetrieveView(RetrieveAPIView):
+    
+    serializer_class = ClienteSerializer
+    queryset = Cliente.objects.all()
+
+class ClienteDestroyView(DestroyAPIView):
+ 
+    serializer_class = ClienteSerializer
+    queryset = Cliente.objects.all()
+
+class ClienteUpdateView(RetrieveUpdateAPIView):
+    
+    serializer_class = ClienteSerializer
+    queryset = Cliente.objects.all()
