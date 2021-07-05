@@ -39,13 +39,14 @@ DJANGO_APPS = (
 )
 
 LOCAL_APPS =(
-    'applications.clientes',
+    'applications.usuarios',
     'applications.pedidos',
     'applications.productos'
 )
 
 THIRD_PARTY_APPS = (
     'rest_framework',
+    'rest_framework.authtoken'
 
 )
 
