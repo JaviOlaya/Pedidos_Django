@@ -19,7 +19,7 @@ from .serializers import UsuarioSerializer,UsuarioLoginSerializer
 
 class USerViewSet(viewsets.GenericViewSet):
 
-    queryset = Usuario.objects
+    queryset = Usuario.objects.filter(is_active=True)
     serielizer_class = UsuarioSerializer
 
     @action(detail = False, methods=['POST'])
@@ -35,7 +35,7 @@ class USerViewSet(viewsets.GenericViewSet):
 
         return Response(data, status=status.HTTP_201_CREATED)
 
-        
+
 class UsuarioListAPIView(ListAPIView):
     serializer_class = UsuarioSerializer
 

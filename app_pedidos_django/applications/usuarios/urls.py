@@ -1,14 +1,15 @@
-from django.urls import path
+from django.urls import path,include,re_path
 
 from rest_framework.routers import DefaultRouter
 
-from . import views
+from . import views 
 
 app_name = 'usuarios_app'
 
 router = DefaultRouter()
 
-router.register(r'usuarios', user_views.USerViewSet, basename='usuarios' )
+
+router.register(r'usuarios', views.USerViewSet, basename='usuarios' )
 
 urlpatterns = [
     path('', include(router.urls)),

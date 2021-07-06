@@ -1,13 +1,16 @@
 from .models import Usuario
 from django.contrib.auth import password_validation, authenticate
+from django.core.validators import RegexValidator, FileExtensionValidator
 
 
 # Django REST Framework
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
+from rest_framework.validators import UniqueValidator
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
+   
     class Meta:
         model = Usuario
         fields =(
@@ -18,11 +21,11 @@ class UsuarioLoginSerializer(serializers.Serializer):
 
   #Vamos a requerir 
   email =  serializers.EmailField()
-  password = serializers.CharField(min_length = 6, max_length=64)
+  password = serializers.CharField(min_length=6, max_length=64)
 
 
 #Validación de datos
-  def validate(sel, data):
+  def validate(self, data):
   
     user = authenticate(username=data['email'], password = data['password'])
 

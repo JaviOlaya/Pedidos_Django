@@ -46,7 +46,8 @@ LOCAL_APPS =(
 
 THIRD_PARTY_APPS = (
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'simple_history.models'
 
 )
 
