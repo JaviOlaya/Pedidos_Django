@@ -1,4 +1,4 @@
-from .models import Usuario
+from .models import User
 from django.contrib.auth import password_validation, authenticate
 from django.core.validators import RegexValidator, FileExtensionValidator
 
@@ -12,7 +12,7 @@ from rest_framework.validators import UniqueValidator
 class UsuarioSerializer(serializers.ModelSerializer):
    
     class Meta:
-        model = Usuario
+        model = User
         fields =(
           '__all__'
         )

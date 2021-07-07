@@ -41,13 +41,14 @@ DJANGO_APPS = (
 LOCAL_APPS =(
     'applications.usuarios',
     'applications.pedidos',
-    'applications.productos'
+    'applications.productos',
 )
 
 THIRD_PARTY_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
-    'simple_history.models'
+    #Libreria para gestión de históricos
+    'simple_history.models',
 
 )
 
@@ -63,6 +64,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #Añadimos middleware para que vea la relaci
+    'simple_history.middleware.HistoryRequestMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'app_pedidos_django.urls'
@@ -105,6 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'usuarios.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -118,5 +123,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+#modelo de autorización
+AUTH_USER_MODEL = 'usuarios.User'
 
 

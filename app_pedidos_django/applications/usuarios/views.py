@@ -12,14 +12,14 @@ from rest_framework.generics import ListAPIView, CreateAPIView,RetrieveAPIView, 
 # Create your views here.
 
 #Modelo de Usuario 
-from .models import Usuario
+from .models import User
 
 #serielizers
 from .serializers import UsuarioSerializer,UsuarioLoginSerializer
 
 class USerViewSet(viewsets.GenericViewSet):
 
-    queryset = Usuario.objects.filter(is_active=True)
+    queryset = User.objects.filter(is_active=True)
     serielizer_class = UsuarioSerializer
 
     @action(detail = False, methods=['POST'])
@@ -52,14 +52,14 @@ class UsuarioCreateView(CreateAPIView):
 class UsuarioRetrieveView(RetrieveAPIView):
     
     serializer_class = UsuarioSerializer
-    queryset = Usuario.objects.all()
+    queryset = User.objects.all()
 
 class UsuarioDestroyView(DestroyAPIView):
  
     serializer_class = UsuarioSerializer
-    queryset = Usuario.objects.all()
+    queryset = User.objects.all()
 
 class UsuarioUpdateView(RetrieveUpdateAPIView):
     
     serializer_class = UsuarioSerializer
-    queryset = Usuario.objects.all()
+    queryset = User.objects.all()
