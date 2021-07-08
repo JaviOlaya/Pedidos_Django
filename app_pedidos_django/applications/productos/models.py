@@ -1,7 +1,7 @@
 from django.db import models
 from model_utils.models import TimeStampedModel
 # Create your models here.
-class Producto (TimeStampedModel):
+class Product (TimeStampedModel):
     G_CHOICES = (
         ('HOMBRE', 'HOMBRE'),
         ('MUJER', 'MUJER'),

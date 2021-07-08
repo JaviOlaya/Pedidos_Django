@@ -6,7 +6,7 @@ from . import views
 app_name = 'pedidos_app'
 
 urlpatterns = [
-        path('', include(router.urls)),
+    path('', include(router.urls)),
     path('api/pedido/list/', views.PedidoListAPIView.as_view()),
     path('api/pedido/create/', views.PedidoCreateView.as_view()),
     path('api/pedido/detail/<pk>/', views.PedidoRetrieveView.as_view()),
