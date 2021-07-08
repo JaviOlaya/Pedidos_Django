@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
-from django.conf import settings
 from django.conf.urls.static import static
-
+from  applications.usuarios.views import Login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', Login.as_view(), name = 'Login'),
     re_path('', include(('applications.usuarios.urls'),namespace = 'users')),
     re_path('', include(('applications.productos.urls'), namespace='products')),
     re_path('', include(('applications.pedidos.urls'), namespace='orders')),

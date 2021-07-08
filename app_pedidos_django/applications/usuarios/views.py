@@ -8,7 +8,6 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView, CreateAPIView,RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView
 
-
 # Create your views here.
 
 #Modelo de Usuario 
@@ -17,14 +16,23 @@ from .models import User
 #serielizers
 from .serializers import UsuarioSerializer,UsuarioLoginSerializer
 
-from rest.rest_framework.authtoken.views import ObtainAuthtoken
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
 
-class Login(ObtainAuthtoken):
+class Login(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
         login_serializer = self.serializer_class(data = request.data, context = {'request':request})
         if login_serializer.is_valid():
-            print("Validación correcta")
+            user=login_serializer.validated_data['user']
+            if user.is_active:
+                token,created = Token.objects.get_or_create(user = user)
+            else:
+                return Response({'error': 'Este no puede iniicar sesión'},
+                        status = status.HTTP_401_UNAUTHORIZED)
+        else:
+            return Response({'error': 'Nombre de usuario o contraseña incorrectos.'},
+                        status = status.HTTP_400_BAD_REQUEST)    
         return Response({'mensaje':'Hola desde response'}, status = status.HTTP_200_OK)
 
 

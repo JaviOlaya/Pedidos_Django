@@ -44,18 +44,19 @@ LOCAL_APPS =(
     'applications.productos',
 )
 
-THIRD_PARTY_APPS = (
+THIRD_APPS = (
+    #Aplicación para la creación de la Api
     'rest_framework',
     'rest_framework.authtoken',
     #Libreria para gestión de históricos
-    'simple_history.models',
+    'simple_history',
     #Librería de generador Swagger
     'drf_yasg',
 
 )
 
 
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_APPS
 
 
 MIDDLEWARE = [

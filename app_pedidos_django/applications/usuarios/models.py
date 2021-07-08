@@ -10,7 +10,7 @@ from .managers import UserManager
 # Create your models here.
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField('Nombre de usuario', unique = True, max_length=50)
-    name = models.CharField('Nombre', max_length=50, blank=True)
+    name = models.CharField('Nombre', max_length=50, blank=True,null=True)
     last_name = models.CharField('Apellidos', max_length=50, blank=True)
     email = models.EmailField('Correo electrónico',blank=False, unique=True)
     phone = models.CharField('Telefono', max_length=15)

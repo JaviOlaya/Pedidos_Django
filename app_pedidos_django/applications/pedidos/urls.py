@@ -1,15 +1,13 @@
-from django.urls import path
-
+from django.urls import path, re_path, include
 
 from . import views
 
 app_name = 'pedidos_app'
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('api/pedido/list/', views.PedidoListAPIView.as_view()),
-    path('api/pedido/create/', views.PedidoCreateView.as_view()),
-    path('api/pedido/detail/<pk>/', views.PedidoRetrieveView.as_view()),
-    path('api/pedido/destroy/<pk>/', views.PedidoDestroyView.as_view()),
-    path('api/pedido/update/<pk>/', views.PedidoUpdateView.as_view()),
+    path('api/pedido/list/', views.OrderListAPIView.as_view()),
+    path('api/pedido/create/', views.OrderCreateView.as_view()),
+    path('api/pedido/detail/<pk>/', views.OrderRetrieveView.as_view()),
+    path('api/pedido/destroy/<pk>/', views.OrderDestroyView.as_view()),
+    path('api/pedido/update/<pk>/', views.OrderUpdateView.as_view()),
 ]

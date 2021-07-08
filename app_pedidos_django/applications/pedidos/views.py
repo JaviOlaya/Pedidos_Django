@@ -8,32 +8,37 @@ from rest_framework.generics import ListAPIView, CreateAPIView,RetrieveAPIView, 
 #Modelo de Pedidos
 
 from .models import Order, OrderDetail
+
+#Serializers
+
+from .serializer import OrderSerializer
+
 # Create your views here.
 
 class OrderListAPIView(ListAPIView):
-    serializer_class = UsuarioSerializer
+    serializer_class = OrderSerializer
 
     def get_queryset(self):
       
         return Order.objects.all()
 
 class OrderCreateView(CreateAPIView):
-    serializer_class = UsuarioSerializer
+    serializer_class = OrderSerializer
 
     def post(self, request):
         serializer = self.serializer_class(data)
 
-class RetrieveView(RetrieveAPIView):
+class OrderRetrieveView(RetrieveAPIView):
     
-    serializer_class = UsuarioSerializer
-    queryset = User.objects.all()
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
 
-class UsuarioDestroyView(DestroyAPIView):
+class OrderDestroyView(DestroyAPIView):
  
-    serializer_class = UsuarioSerializer
-    queryset = User.objects.all()
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
 
-class UsuarioUpdateView(RetrieveUpdateAPIView):
+class OrderUpdateView(RetrieveUpdateAPIView):
     
-    serializer_class = UsuarioSerializer
-    queryset = User.objects.all()
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()

@@ -1,5 +1,8 @@
 from django.db import models
+from django.conf import settings
 from model_utils.models import TimeStampedModel
+
+from applications.productos.models import Product
 
 # Create your models here.
 
@@ -12,7 +15,8 @@ class Order(TimeStampedModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="Usuario Pedido",
+        verbose_name='Comprador',
+        related_name="user_order",
         #editable=False
     )
     class Meta:
@@ -27,14 +31,10 @@ class OrderDetail(TimeStampedModel):
     )
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-
+    address_send = models.TextField('Direccion de envio', blank = True) 
     count =models.PositiveIntegerField('Cantidad')
 
-    price_order = models.DecimalField(
-        'Precio Pedido', 
-        max_digits=10, 
-        decimal_places=2
-    )
+    price_order = models.DecimalField('Precio Pedido', max_digits=10, decimal_places=2)
     anulate = models.BooleanField(default=False)
 
 
