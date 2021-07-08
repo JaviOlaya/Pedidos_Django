@@ -4,7 +4,8 @@ from model_utils.models import TimeStampedModel
 class Producto (TimeStampedModel):
     G_CHOICES = (
         ('HOMBRE', 'HOMBRE'),
-        ('MUJER', 'MUJER')
+        ('MUJER', 'MUJER'),
+        ('OTROS', 'OTROS'),
     )
 
     COLOR_CHOICES = (
@@ -33,4 +34,17 @@ class Producto (TimeStampedModel):
     g_model = models.CharField('Género',max_length=30, choices=G_CHOICES)
     color_model = models.CharField('Color',max_length=30, choices=COLOR_CHOICES)
     size_model = models.CharField('Talla',max_length=30, choices=COLOR_CHOICES)
-    price = models.IntegerField('Precio',blank=True,null=True )
+    price = models.DecimalField()('Precio',max_digits=10, decimal_places=2 )
+    stock = models.PositiveIntegerField('Stock', default=0),
+    num_sales = models.PositiveIntegerField('Unidades vendidas', default=0)
+    user_created = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name="prod_created",
+        )
+
+
+    class Meta:
+        verbose_name = 'Producto'
+        verbose_name_plural = 'Productos'
+
+    def __str__(self):
+        return str(self.id)+ ' ' + str(self.name)

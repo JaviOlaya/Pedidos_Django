@@ -49,6 +49,8 @@ THIRD_PARTY_APPS = (
     'rest_framework.authtoken',
     #Libreria para gestión de históricos
     'simple_history.models',
+    #Librería de generador Swagger
+    'drf_yasg',
 
 )
 
