@@ -20,8 +20,9 @@ from  applications.usuarios.views import Login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('logout/', Logout.as_view(), name = 'logout'),
     path('', Login.as_view(), name = 'Login'),
     re_path('', include(('applications.usuarios.urls'),namespace = 'users')),
-    re_path('', include(('applications.productos.urls'), namespace='products')),
+    re_path('', include(('applications.productos.routers'), namespace='products')),
     re_path('', include(('applications.pedidos.urls'), namespace='orders')),
 ]

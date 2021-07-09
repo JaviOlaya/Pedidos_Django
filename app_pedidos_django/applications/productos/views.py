@@ -17,8 +17,10 @@ from .models import Product
 #serielizers
 from .serializers import ProductSerializer
 
-
-
+class ProductViewSet(viewsets.ModelViewSet):
+    serializer_class = ProductSerializer
+    queryset = ProductSerializer.Meta.model.objects.filter(state=True)
+    
 
 class ProductListAPIView(ListAPIView):
     serializer_class = ProductSerializer
