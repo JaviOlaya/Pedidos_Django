@@ -40,8 +40,18 @@ class OrderViewSet(viewsets.ModelViewSet):
             if product_serializer.is_valid():
                 product_serializer.save()
                 return Response({'message':'El pedido se ha actualizado correctamente'},product_serializer.data, status = status.HTTP_200_OK)
-            return Response({'error', 'No existe un pedido con estos datos' }, status = status = status.HTTP_400_BAD_REQUEST)
+            return Response({'error', 'No existe un pedido con estos datos' }, status  = status.HTTP_400_BAD_REQUEST)
             
+    def delete(self, request, pk = None):
+
+        order = self.get_queryset().filter(id=pk).first()
+        
+        if order:
+            order.state = False
+            order.save()
+            return Response({'message':'Pedido eliminado de forma correcta'}, status = status.HTTP_200_OK)
+        return Response({'error': 'No existe un pedido con estos datos'}, status = status.HTTP_400_BAD_REQUEST)
+        
 
 
 
