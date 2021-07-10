@@ -7,7 +7,7 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView,CreateAPIView,RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView
 
 #Modelo de Usuario 
 from .models import User
@@ -53,7 +53,8 @@ class Login(ObtainAuthToken):
                     #      'message':'Ha iniciado sesión correctamente.'
                     #     }, status  = status.HTTP_201_CREATED)
 
-                    return Response({'error': 'Ya se ha iniciado sesion con este usuario'}, status = status.HTTP_409_CONFLICT)
+                    return Response({'error': 'Ya se ha iniciado sesion con este usuario'}, 
+                        status = status.HTTP_409_CONFLICT)
             else:
                 return Response({'error': 'Este no puede iniicar sesión'},
                         status = status.HTTP_401_UNAUTHORIZED)
@@ -62,10 +63,12 @@ class Login(ObtainAuthToken):
                         status = status.HTTP_400_BAD_REQUEST)    
         return Response({'mensaje':'Hola desde response'}, status = status.HTTP_200_OK)
 
+
+
 class Logout(APIView):
 
     def get(self, request, *args, **kwargs):
-        try
+        try:
             token = request.GET.get('token')
             token = Token.objects.filter(key = token).first()
 
@@ -95,32 +98,35 @@ class Logout(APIView):
 
 
 
+class UserViewSet(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    
 
 
-class UsuarioListAPIView(ListAPIView):
-    serializer_class = UsuarioSerializer
+class UserListAPIView(ListAPIView):
+    serializer_class = UserSerializer
 
     def get_queryset(self):
       
-        return Usuario.objects.all()
+        return User.objects.all()
 
-class UsuarioCreateView(CreateAPIView):
-    serializer_class = UsuarioSerializer
+class UserCreateView(CreateAPIView):
+    serializer_class = UserSerializer
 
     def post(self, request):
         serializer = self.serializer_class(data)
 
-class UsuarioRetrieveView(RetrieveAPIView):
+class UserRetrieveView(RetrieveAPIView):
     
-    serializer_class = UsuarioSerializer
+    serializer_class = UserSerializer
     queryset = User.objects.all()
 
-class UsuarioDestroyView(DestroyAPIView):
+class UserDestroyView(DestroyAPIView):
  
-    serializer_class = UsuarioSerializer
+    serializer_class = UserSerializer
     queryset = User.objects.all()
 
-class UsuarioUpdateView(RetrieveUpdateAPIView):
+class UserUpdateView(RetrieveUpdateAPIView):
     
-    serializer_class = UsuarioSerializer
+    serializer_class = UserSerializer
     queryset = User.objects.all()

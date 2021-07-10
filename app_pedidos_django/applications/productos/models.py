@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 from model_utils.models import TimeStampedModel
 from django.conf import settings
 # Create your models here.
@@ -69,7 +70,7 @@ class Product (TimeStampedModel):
     date_order = models.DateTimeField('Tipo de Venta',)
     name = models.CharField('Nombre', max_length=80)
     brand = models.CharField('Marca',max_length=30, choices=B_CHOICES)
-    description = models.TextField('Descripcion producto',max_length=200, blank=True)
+    description = RichTextField('Descripcion producto',max_length=300, blank=True)
     g_model = models.CharField('Genero',max_length=30, choices=G_CHOICES)
     color_model = models.CharField('Color',max_length=30, choices=COLOR_CHOICES)
     size_model = models.CharField('Talla',max_length=30, choices=SIZE_CHOICES)

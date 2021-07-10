@@ -1,10 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
-#from simple_history.models import HistoricalRecords
+from simple_history.models import HistoricalRecords
 
 
 from .managers import UserManager
+
+
 
 
 # Create your models here.
@@ -19,7 +21,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField('Usuario activo',default = True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-#    historical = HistoricalRecords()
+    historical = HistoricalRecords()
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email',]
@@ -33,9 +35,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
     def get_short_name(self):
-        return self.username
+        return self.id+' '+self.username
     
     def get_full_name(self):
-        return self.name + ' ' + self.last_name
+        return self.id+' '+self.name + ' ' + self.last_name
 
   

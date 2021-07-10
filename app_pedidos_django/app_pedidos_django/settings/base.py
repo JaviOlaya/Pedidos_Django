@@ -50,6 +50,7 @@ THIRD_APPS = (
     'rest_framework.authtoken',
     #Libreria para gestión de históricos
     'simple_history',
+    'ckeditor',
     #Librería de generador Swagger
     'drf_yasg',
 
