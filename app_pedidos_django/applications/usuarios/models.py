@@ -16,6 +16,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField('Apellidos', max_length=50, blank=True)
     email = models.EmailField('Correo electrónico',blank=False, unique=True)
     phone = models.CharField('Telefono', max_length=15)
+    is_staff = models.BigAutoField(default=False)
     created_at = models.DateTimeField('Fecha creacion :',auto_now_add=True)
     updated_at = models.DateTimeField('Fecha actualizacion: ',auto_now=True)
     historical = HistoricalRecords()
