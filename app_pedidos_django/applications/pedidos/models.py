@@ -3,8 +3,13 @@ from django.conf import settings
 from ckeditor.fields import RichTextField
 from model_utils.models import TimeStampedModel
 
+
+#Traer el modelo de los productos
 from applications.productos.models import Product
 
+
+#Traer el serializador de pedidos
+from .managers import OrderDetailManager
 # Create your models here.
 
 class Order(TimeStampedModel):
@@ -24,6 +29,7 @@ class Order(TimeStampedModel):
     class Meta:
         verbose_name = 'Pedido'
         verbose_name_plural = 'Pedidos'
+
 class OrderDetail(TimeStampedModel):
     
     order = models.ForeignKey(
@@ -43,3 +49,6 @@ class OrderDetail(TimeStampedModel):
     class Meta:
         verbose_name = 'Detalle pedido'
         verbose_name_plural = 'Detalles de un pedido'
+
+    def __str__(self):
+        return str(self.order.id) + ' - ' + str(self.product.product_name)

@@ -19,8 +19,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     password = models.CharField('Contraseña', max_length=64)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField('Usuario activo',default = True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField('Fecha creacion :',auto_now_add=True)
+    updated_at = models.DateTimeField('Fecha actualizacion: ',auto_now=True)
     historical = HistoricalRecords()
 
     USERNAME_FIELD = 'username'
