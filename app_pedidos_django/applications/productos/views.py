@@ -44,8 +44,8 @@ class ProductViewSet(viewsets.ModelViewSet):
             product_serializer = self.serializer_class(self.get_queryset(pk),data = request.data)
             if product_serializer.is_valid():
                 product_serializer.save()
-                return Response(product_serializer.data, status = status.HTTP_200_OK)
-            return Response(product_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
+                return Response({'message':'El producto se ha actualizado correctamente'},product_serializer.data, status = status.HTTP_200_OK)
+            return Response({'error':'No existe un pedido con esos datos'},product_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
 
 
     def delete(self, request, pk = None):

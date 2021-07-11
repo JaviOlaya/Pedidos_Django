@@ -8,7 +8,7 @@ from applications.productos.models import Product
 # Create your models here.
 
 class Order(TimeStampedModel):
-
+    date_order = models.DateTimeField('Fecha de pedido', blank = True,null = True)
     count = models.PositiveIntegerField('Cantidad de Productos')
     amount = models.DecimalField('Importe pedido', max_digits=10, decimal_places=2)
     content = RichTextField('Notas', max_length=300, blank=True)

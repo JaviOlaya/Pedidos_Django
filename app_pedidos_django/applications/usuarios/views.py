@@ -102,31 +102,3 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     
 
-
-class UserListAPIView(ListAPIView):
-    serializer_class = UserSerializer
-
-    def get_queryset(self):
-      
-        return User.objects.all()
-
-class UserCreateView(CreateAPIView):
-    serializer_class = UserSerializer
-
-    def post(self, request):
-        serializer = self.serializer_class(data)
-
-class UserRetrieveView(RetrieveAPIView):
-    
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-
-class UserDestroyView(DestroyAPIView):
- 
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-
-class UserUpdateView(RetrieveUpdateAPIView):
-    
-    serializer_class = UserSerializer
-    queryset = User.objects.all()

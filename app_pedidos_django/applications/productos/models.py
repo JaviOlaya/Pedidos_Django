@@ -68,7 +68,7 @@ class Product (TimeStampedModel):
         (S8,'46')
     ]
     date_order = models.DateTimeField('Tipo de Venta',)
-    name = models.CharField('Nombre', max_length=80)
+    product_name = models.CharField('Nombre', max_length=80)
     brand = models.CharField('Marca',max_length=30, choices=B_CHOICES)
     description = RichTextField('Descripcion producto',max_length=300, blank=True)
     g_model = models.CharField('Genero',max_length=30, choices=G_CHOICES)
@@ -87,4 +87,4 @@ class Product (TimeStampedModel):
         verbose_name_plural = 'Productos'
 
     def __str__(self):
-        return str(self.id)+ ' ' + str(self.name)
+        return str(self.id)+ ' ' + str(self.product_name)
