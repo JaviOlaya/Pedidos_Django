@@ -79,7 +79,7 @@ class Product (TimeStampedModel):
     num_sales = models.PositiveIntegerField('Unidades vendidas', default=0)
     user_created = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name="prod_created",
-        )
+    )
 
 
     class Meta:

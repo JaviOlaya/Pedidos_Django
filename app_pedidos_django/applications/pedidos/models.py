@@ -6,7 +6,7 @@ from model_utils.models import TimeStampedModel
 
 #Traer el modelo de los productos
 from applications.productos.models import Product
-
+from applications.usuarios.models import User
 
 #Traer el serializador de pedidos
 from .managers import OrderDetailManager
@@ -19,12 +19,8 @@ class Order(TimeStampedModel):
     content = RichTextField('Notas', max_length=300, blank=True)
     close = models.BooleanField('Pedido cerrado', default=False)
     anulate = models.BooleanField(default=False)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        verbose_name='Comprador',
-        related_name="user_order",
-        #editable=False
+    user_order = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="usuario_pedido",
     )
 
     
