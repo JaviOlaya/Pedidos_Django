@@ -4,13 +4,12 @@ from django.contrib.auth.models import BaseUserManager
 
 class UserManager(BaseUserManager, models.Manager):
     
-    def _create_user(self,username, email, password, is_staff, is_superuser, is_active, **extra_fields):
+    def _create_user(self,username, email, password, is_staff, is_superuser, **extra_fields):
         user = self.model(
             username = username,
             email=email,
             is_staff=is_staff,
             is_superuser = is_superuser,
-            is_active = is_active,
             **extra_fields
         )
         # Se encripta la contraseña
@@ -19,7 +18,7 @@ class UserManager(BaseUserManager, models.Manager):
         return user
 
     def create_user (self,username, email, password=None, **extra_fields):
-        return self._create_user(username, email, password, False,False, True, **extra_fields)
+        return self._create_user(username, email, password, False,False, **extra_fields)
 
     def create_superuser(self, username, email, password = None, **extrafields):
-        return self._create_user(username, email, password,True, True, True, **extrafields)
+        return self._create_user(username, email, password,True, True, **extrafields)

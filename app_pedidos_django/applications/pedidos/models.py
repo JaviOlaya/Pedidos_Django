@@ -26,9 +26,13 @@ class Order(TimeStampedModel):
         related_name="user_order",
         #editable=False
     )
+
+    
     class Meta:
         verbose_name = 'Pedido'
         verbose_name_plural = 'Pedidos'
+
+    
 
 class OrderDetail(TimeStampedModel):
     
@@ -44,7 +48,7 @@ class OrderDetail(TimeStampedModel):
 
     price_order = models.DecimalField('Precio Pedido', max_digits=10, decimal_places=2)
     anulate = models.BooleanField(default=False)
-
+    objects = OrderDetailManager()
 
     class Meta:
         verbose_name = 'Detalle pedido'

@@ -39,19 +39,7 @@ class Login(ObtainAuthToken):
                 
                 else:
                     
-                    # all_sessions=Session.objects,filter(expire_date__gte = datetime.now())
-                    # if all_sessions.exists():
-                    #     for session in all_sessions:
-                    #         session_data = session.get_decoded()
-                    #         if user.id == int(session_data.get('_auth_user_id')):
-                    #             session.delete()
-                    # token.delete()
-                    # token= Token.objects.create(user = user)
-                    # return Response({
-                    #     'token': token.key,
-                    #      'user': user_serializer.data,
-                    #      'message':'Ha iniciado sesión correctamente.'
-                    #     }, status  = status.HTTP_201_CREATED)
+            
 
                     return Response({'error': 'Ya se ha iniciado sesion con este usuario'}, 
                         status = status.HTTP_409_CONFLICT)

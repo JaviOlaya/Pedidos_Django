@@ -25,8 +25,8 @@ class Product (TimeStampedModel):
     MUJER = '1'
     OTROS = '2'
     G_CHOICES = [
-        (HOMBRE, 'HOMBRE'),
-        (MUJER, 'MUJER'),
+        ('HOMBRE', 'HOMBRE'),
+        ('MUJER', 'MUJER'),
         (OTROS, 'OTROS'),
     ]
 
@@ -67,7 +67,7 @@ class Product (TimeStampedModel):
         (S7,'44'),
         (S8,'46')
     ]
-    date_order = models.DateTimeField('Tipo de Venta',)
+
     product_name = models.CharField('Nombre', max_length=80)
     brand = models.CharField('Marca',max_length=30, choices=B_CHOICES)
     description = RichTextField('Descripcion producto',max_length=300, blank=True)
@@ -75,7 +75,7 @@ class Product (TimeStampedModel):
     color_model = models.CharField('Color',max_length=30, choices=COLOR_CHOICES)
     size_model = models.CharField('Talla',max_length=30, choices=SIZE_CHOICES)
     price = models.DecimalField('Precio',max_digits=10, decimal_places=2 )
-    stock = models.PositiveIntegerField('Stock', default=0),
+    stock = models.PositiveIntegerField('Stock', default=0)
     num_sales = models.PositiveIntegerField('Unidades vendidas', default=0)
     user_created = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name="prod_created",

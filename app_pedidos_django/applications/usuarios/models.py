@@ -16,10 +16,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField('Apellidos', max_length=50, blank=True)
     email = models.EmailField('Correo electrónico',blank=False, unique=True)
     phone = models.CharField('Telefono', max_length=15)
-    is_staff = models.BigAutoField(default=False)
+    is_staff = models.BooleanField('Personal de la empresa',default=False)
     created_at = models.DateTimeField('Fecha creacion :',auto_now_add=True)
     updated_at = models.DateTimeField('Fecha actualizacion: ',auto_now=True)
     historical = HistoricalRecords()
+
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email',]
@@ -33,9 +34,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
     def get_short_name(self):
-        return self.id+' '+self.username
+        return str(self.id)+' '+self.username
     
     def get_full_name(self):
-        return self.id+' '+self.name + ' ' + self.last_name
+        return str(self.id)+' '+self.name + ' ' + self.last_name
 
   
