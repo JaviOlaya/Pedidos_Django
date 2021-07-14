@@ -28,6 +28,7 @@ class Order(TimeStampedModel):
     )
 
     date_order = models.DateTimeField('Fecha de pedido', blank = True,null = True)
+    #product=models.ForeignKey(Product,on_delete=models.CASCADE,related_name='Producto_pedido')
     count = models.PositiveIntegerField('Cantidad de Productos')
     amount = models.DecimalField('Importe del pedido', max_digits=10, decimal_places=2)
     content = RichTextField('Notas', max_length=300, blank=True)
