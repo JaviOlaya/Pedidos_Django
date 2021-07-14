@@ -1,5 +1,4 @@
 from rest_framework import serializers,pagination
-
 from .models import Order, OrderDetail
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -17,13 +16,15 @@ class OrderSerializer(serializers.ModelSerializer):
             'products', 
             'close',
             'anulate',
-            'user_order' ,
+            'user_order',
     )
     
     def get_products(self, obj):
         query = OrderDetail.objects.products_by_order(obj.id)
         orders_produced = OrderDetailSerializer(query, many=True).data
         return orders_produced
+    
+ 
 
 class OrderDetailSerializer(serializers.ModelSerializer):
 
@@ -38,7 +39,7 @@ class OrderDetailSerializer(serializers.ModelSerializer):
            'price_order',
            'anulate',
         )
-
+   
 
 class ArrayIntegerSerializer(serializers.ListField):
 

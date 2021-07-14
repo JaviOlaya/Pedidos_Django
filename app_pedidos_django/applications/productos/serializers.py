@@ -5,7 +5,19 @@ from .models import Product
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields =('__all__')
+        fields =(
+        'product_name',
+        'brand' ,
+        'description' ,
+        'g_model' ,
+        'color_model' ,
+        'size_model' ,
+        'price' ,
+        'stock' ,
+        'num_sales', 
+        'user_created',
+    )
+
 
 class PaginationSerializer(pagination.PageNumberPagination):
 
