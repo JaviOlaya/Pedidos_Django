@@ -1,10 +1,10 @@
 from .models import User
 from django.contrib.auth import password_validation, authenticate
-from django.core.validators import RegexValidator, FileExtensionValidator
+from django.core.validators import RegexValidator
 
 
 # Django REST Framework
-from rest_framework import serializers
+from rest_framework import serializers, pagination
 from rest_framework.authtoken.models import Token
 from rest_framework.validators import UniqueValidator
 
@@ -44,6 +44,19 @@ class UserListSerializer(serializers.ModelSerializer):
               'email': instance['email'],
               'password': instance['password']
             }
+
+class USerSignUpSerializer(serializers.Serializer):
+      
+      email = serializers.EmailField(
+        validators = [UniqueValidator(queryset=User.objects.all())]
+      )
+
+      username = serializers.CharField(
+        min_length = 4,
+        max_length = 20,
+        validators =[UniqueValidator(queryset = User.objects.all())]
+      )
+
 class UserLoginSerializer(serializers.Serializer):
 
   #Vamos a requerir 
@@ -67,3 +80,10 @@ class UserLoginSerializer(serializers.Serializer):
     """Generar o recuperar token """
     token, created = Token.objects.get_or_create(user=self.context['user'])
     return self.context['user'], token.key
+
+
+
+class PaginationSerializer(pagination.PageNumberPagination):
+
+    page_size = 5
+    max_page_size = 10

@@ -7,39 +7,43 @@ from .managers import ProductManager
 class Product (TimeStampedModel):
    
     B_CHOICES =(
-        ('0', 'MARCA1'),
-        ('1', 'MARCA2'),
-        ('2', 'MARCA3'),
-        ('3', 'MARCA4'),
-        ('4', 'MARCA5'),
-        ('5', 'MARCA6'),
+        ('0','SELECCIONAR...'),
+        ('1', 'MARCA1'),
+        ('2', 'MARCA2'),
+        ('3', 'MARCA3'),
+        ('4', 'MARCA4'),
+        ('5', 'MARCA5'),
+        ('6', 'MARCA6'),
     )
 
     G_CHOICES = (
-        ('0', 'HOMBRE'),
-        ('1', 'MUJER'),
-        ('2', 'OTROS'),
+        ('0','SELECCIONAR...'),
+        ('1', 'HOMBRE'),
+        ('2', 'MUJER'),
+        ('3', 'OTROS'),
     )
 
     COLOR_CHOICES = (
-        ('0', 'ROJO'),
-        ('1', 'VERDE'),
-        ('2','NARANJA'),
-        ('3', 'AMARILLO'),
-        ('4', 'BLANCO'),
-        ('5', 'NEGRO'),
-        ('6', 'MARRON'),
+        ('0','SELECCIONAR...'),
+        ('1', 'ROJO'),
+        ('2', 'VERDE'),
+        ('3','NARANJA'),
+        ('4', 'AMARILLO'),
+        ('5', 'BLANCO'),
+        ('6', 'NEGRO'),
+        ('7', 'MARRON'),
     )
 
     SIZE_CHOICES = (
-        ('0','32'),
-        ('1','34'),
-        ('2','36'),
-        ('3','38'),
-        ('4','40'),
-        ('5','42'),
-        ('6','44'),
-        ('7','46'),
+        ('0','SELECCIONAR...'),
+        ('1','32'),
+        ('2','34'),
+        ('3','36'),
+        ('4','38'),
+        ('5','40'),
+        ('6','42'),
+        ('7','44'),
+        ('8','46'),
     )
 
     product_name = models.CharField('Nombre', max_length=80, blank = False,unique=True, null = False)
@@ -59,6 +63,8 @@ class Product (TimeStampedModel):
     class Meta:
         verbose_name = 'Producto'
         verbose_name_plural = 'Productos'
+        ordering = ['product_name']
+        db_table = 'Product'
 
     def __str__(self):
         return str(self.id)+ ' ' + str(self.product_name)

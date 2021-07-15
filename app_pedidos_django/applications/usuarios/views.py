@@ -1,13 +1,10 @@
 from django.shortcuts import render
 from datetime import datetime
 
-from django.views.generic import ListView, TemplateView
-
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, DestroyAPIView, RetrieveUpdateAPIView
+
 
 #Modelo de Usuario 
 from .models import User
@@ -20,7 +17,23 @@ from rest_framework.authtoken.views import ObtainAuthToken
 
 from applications.usuarios.serializers import UserTokenSerializer
 
+class UserViewSet(viewsets.GenericViewSet):
 
+    queryset  =User.objects.filter(is_active=True)
+    serializer_class = UserSerializer
+
+
+    @action(detail=False, methods = ['post'])
+    def login(self, request):
+        serializer = UserSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user, token = serializer.save()
+        data= {
+            'user': UserSerializer(user).data,
+            'access_token': token
+        }
+        return Response(data, status = status.HTTP_201_CREATED)
+        
 class Login(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
@@ -53,7 +66,7 @@ class Login(ObtainAuthToken):
 
 
 
-class Logout(APIView):
+class Logout(viewsets.GenericViewSet):
 
     def get(self, request, *args, **kwargs):
         try:
@@ -86,7 +99,5 @@ class Logout(APIView):
 
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
     
 

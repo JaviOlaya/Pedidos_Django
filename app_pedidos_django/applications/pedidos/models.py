@@ -9,7 +9,7 @@ from applications.productos.models import Product
 from applications.usuarios.models import User
 
 #Traer el serializador de pedidos
-from .managers import OrderDetailManager
+from .managers import OrderDetailManager,OrderManager
 # Create your models here.
 
 class Order(TimeStampedModel):
@@ -40,11 +40,13 @@ class Order(TimeStampedModel):
     user_order = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="usuario_pedido",
     )
-
+    objects = OrderManager()
     
     class Meta:
         verbose_name = 'Pedido'
         verbose_name_plural = 'Pedidos'
+        ordering = ['date_order']
+        db_table = 'Order'
 
     def __str__(self):
         return 'Nº de pedido'+str(self.id) + ' - ' + 'Fecha : '+str(self.date_order)
