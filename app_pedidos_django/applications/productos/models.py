@@ -3,51 +3,83 @@ from ckeditor.fields import RichTextField
 from model_utils.models import TimeStampedModel
 from django.conf import settings
 from .managers import ProductManager
+
+
 # Create your models here.
 class Product (TimeStampedModel):
    
+    B1 = '0'
+    B2 = '1'
+    B3 = '2'
+    B4 = '3'
+    B5 = '4'
+    B6 = '5'
+    B7 = '6'
+
     B_CHOICES =(
-        ('0','SELECCIONAR...'),
-        ('1', 'MARCA1'),
-        ('2', 'MARCA2'),
-        ('3', 'MARCA3'),
-        ('4', 'MARCA4'),
-        ('5', 'MARCA5'),
-        ('6', 'MARCA6'),
+        ( B1,'SELECCIONAR...'),
+        ( B2, 'MARCA1'),
+        ( B3, 'MARCA2'),
+        ( B4, 'MARCA3'),
+        ( B5, 'MARCA4'),
+        ( B6, 'MARCA5'),
+        ( B7, 'MARCA6'),
     )
 
+    G1 = '0'
+    G2 = '1'
+    G3 = '2'
+    G4 = '3'
     G_CHOICES = (
-        ('0','SELECCIONAR...'),
-        ('1', 'HOMBRE'),
-        ('2', 'MUJER'),
-        ('3', 'OTROS'),
+        (G1,'SELECCIONAR...'),
+        (G2, 'HOMBRE'),
+        (G3, 'MUJER'),
+        (G4, 'OTROS'),
     )
+
+    C1 ='0'
+    C2 ='1'
+    C3 ='2'
+    C4 ='3'
+    C5 ='4'
+    C6 ='5'
+    C7 ='6'
+    C8 ='7'
 
     COLOR_CHOICES = (
-        ('0','SELECCIONAR...'),
-        ('1', 'ROJO'),
-        ('2', 'VERDE'),
-        ('3','NARANJA'),
-        ('4', 'AMARILLO'),
-        ('5', 'BLANCO'),
-        ('6', 'NEGRO'),
-        ('7', 'MARRON'),
+        (C1,'SELECCIONAR...'),
+        (C2, 'ROJO'),
+        (C3, 'VERDE'),
+        (C4,'NARANJA'),
+        (C5, 'AMARILLO'),
+        (C6, 'BLANCO'),
+        (C7, 'NEGRO'),
+        (C8, 'MARRON'),
     )
 
+    S1='0'
+    S2='1'
+    S3='2'
+    S4='3'
+    S5='4'
+    S6='5'
+    S7='6'
+    S8='7'
+    S9='8'
     SIZE_CHOICES = (
-        ('0','SELECCIONAR...'),
-        ('1','32'),
-        ('2','34'),
-        ('3','36'),
-        ('4','38'),
-        ('5','40'),
-        ('6','42'),
-        ('7','44'),
-        ('8','46'),
+        (S1,'SELECCIONAR...'),
+        (S2,'32'),
+        (S3,'34'),
+        (S4,'36'),
+        (S5,'38'),
+        (S6,'40'),
+        (S7,'42'),
+        (S8,'44'),
+        (S9,'46'),
     )
 
     product_name = models.CharField('Nombre', max_length=80, blank = False,unique=True, null = False)
-    brand = models.CharField('Marca',max_length=30, choices = B_CHOICES,)
+    brand = models.CharField('Marca',max_length=30, choices = B_CHOICES)
     description = RichTextField('Descripcion producto',max_length = 300, blank = False, null = False)
     g_model = models.CharField('Genero',max_length=30, choices=G_CHOICES)
     color_model = models.CharField('Color',max_length=30, choices = COLOR_CHOICES)
@@ -59,6 +91,7 @@ class Product (TimeStampedModel):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name="prod_created",
     )
 
+    objects = ProductManager()
 
     class Meta:
         verbose_name = 'Producto'
